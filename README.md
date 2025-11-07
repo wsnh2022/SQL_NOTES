@@ -15,22 +15,26 @@
 
 ---
 
-# PART 1: DATA MANIPULATION
-*Daily CRUD operations*
+# PART 1: DATA MANIPULATION $\color{blue}{Daily\ CRUD\ operations\}$
 
 ---
 
 ## 1. Core Commands
 
-### Basic Data Manipulation
+### 1.1 Basic Data Manipulation
 
-**SELECT - Retrieve data**
+<details>
+<summary> <strong> SELECT - Retrieve data <strong> </summary>
+
 ```sql
 SELECT column1, column2 FROM table_name;
 SELECT * FROM table_name WHERE condition;
 ```
+</details>
 
-**INSERT - Add new rows**
+<details>
+<summary><strong> INSERT - Add new rows <strong> </summary>
+
 ```sql
 -- Single row
 INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
@@ -44,8 +48,11 @@ INSERT INTO users (name, email) VALUES
 INSERT INTO archive_orders 
 SELECT * FROM orders WHERE order_date < '2024-01-01';
 ```
+</details>
 
-**UPDATE - Modify existing rows**
+<details>
+<summary> <strong> UPDATE - Modify existing rows <strong> </summary>
+
 ```sql
 -- Simple update
 UPDATE employees SET salary = 60000 WHERE id = 5;
@@ -59,8 +66,11 @@ JOIN departments d ON e.dept_id = d.id
 SET e.salary = e.salary * 1.1
 WHERE d.name = 'Sales';
 ```
+</details>
 
-**DELETE - Remove rows**
+<details>
+<summary> <strong> DELETE - Remove rows <strong> </summary>
+
 ```sql
 -- Delete specific rows
 DELETE FROM orders WHERE status = 'cancelled';
@@ -70,10 +80,15 @@ DELETE o FROM orders o
 JOIN customers c ON o.customer_id = c.id
 WHERE c.account_status = 'inactive';
 ```
+</details>
 
-### Table Structure Commands
+---
 
-**CREATE TABLE - Build new table**
+### 1.2 Table Structure Commands
+
+<details>
+<summary> <strong> CREATE TABLE - Build new table <strong> </summary>
+
 ```sql
 CREATE TABLE employees (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -83,8 +98,11 @@ CREATE TABLE employees (
   hire_date DATE DEFAULT CURRENT_DATE
 );
 ```
+</details>
 
-**ALTER TABLE - Modify table structure**
+<details>
+<summary> <strong> ALTER TABLE - Modify table structure <strong> </summary>
+
 ```sql
 -- Add column
 ALTER TABLE employees ADD COLUMN phone VARCHAR(20);
@@ -100,32 +118,53 @@ ALTER TABLE employees ADD CONSTRAINT fk_dept
   FOREIGN KEY (dept_id) REFERENCES departments(id);
 ```
 
-**DROP TABLE - Delete entire table**
+</details>
+
+<details>
+<summary> <strong> DROP TABLE - Delete entire table <strong> </summary>
+
 ```sql
 DROP TABLE IF EXISTS temp_data;
 ```
+</details>
 
-**TRUNCATE - Remove all rows, keep structure**
+<details>
+<summary> <strong> TRUNCATE - Remove all rows, keep structure <strong> </summary>
+
 ```sql
 TRUNCATE TABLE logs;  -- Faster than DELETE, resets auto-increment
 ```
 
-### Index Management
+</details>
 
-**CREATE INDEX - Manual index creation**
+---
+
+### 1.3 Index Management
+
+<details>
+<summary> <strong> CREATE INDEX - Manual index creation <strong> </summary>
+
 ```sql
 CREATE INDEX idx_email ON users(email);
 CREATE INDEX idx_name_dept ON employees(name, department);
 ```
+</details>
 
-**DROP INDEX - Remove index**
+<details>
+<summary> <strong> DROP INDEX - Remove index <strong> </summary>
+
 ```sql
 DROP INDEX idx_email ON users;
 ```
+</details>
 
-### Views (Virtual Tables)
+---
 
-**CREATE VIEW - Create virtual table**
+### 1.4 Views (Virtual Tables)
+
+<details>
+<summary> <strong> CREATE VIEW - Create virtual table <strong> </summary>
+
 ```sql
 CREATE VIEW active_customers AS
 SELECT id, name, email FROM customers WHERE status = 'active';
@@ -133,6 +172,7 @@ SELECT id, name, email FROM customers WHERE status = 'active';
 -- Use like regular table
 SELECT * FROM active_customers WHERE name LIKE 'A%';
 ```
+</details>
 
 > **💡 Pro tip:** Views don't store data - they're saved queries that run when accessed.
 
@@ -171,13 +211,16 @@ FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
 - `IS NULL` / `IS NOT NULL` - null checks
 
 **Operator precedence (high to low):**
-1. Parentheses `()`
-2. Comparison operators
-3. `NOT`
-4. `AND`
-5. `OR`
+Missing details — complete, precise SQL logical operator precedence (from highest to lowest):
 
-> **⚠️ Warning:** Always use parentheses for clarity, even when not strictly needed.
+1. **Parentheses `()`** — force explicit evaluation order.
+2. **Arithmetic operators** `*, /, +, -` — handled before logical/comparison.
+3. **Comparison operators** `=, >, <, >=, <=, <>, !=, IS, LIKE, IN, BETWEEN` — evaluated left to right.
+4. **NOT** — unary logical negation, applies to next condition only.
+5. **AND** — joins conditions; evaluated before OR.
+6. **OR** — lowest logical precedence.
+
+> **⚠️ Warning:** parentheses override all. Always use parentheses for clarity, even when not strictly needed.
 
 ---
 
@@ -201,8 +244,7 @@ HAVING AVG(salary) > 80000;  -- aggregate filter
 
 ---
 
-# PART 2: DATA RETRIEVAL
-*Complex queries*
+# PART 2: DATA RETRIEVAL $\color{blue}{Complex\ queries\}$
 
 ---
 
@@ -257,8 +299,7 @@ WHERE salary > (SELECT AVG(salary) FROM employees e2 WHERE e2.dept = e1.dept);
 
 ---
 
-# PART 3: DATA INTEGRITY
-*Prevent errors*
+# PART 3: DATA INTEGRITY $\color{blue}{Prevent\ errors\}$
 
 ---
 
@@ -344,8 +385,7 @@ Enforce data integrity rules:
 
 ---
 
-# PART 4: DATA TRANSFORMATION
-*Real-world formatting*
+# PART 4: DATA TRANSFORMATION $\color{blue}{Real-world\ formatting\}$
 
 ---
 
@@ -406,32 +446,49 @@ ORDER BY department ASC, salary DESC
 
 ## 15. String Functions (Essential Subset)
 
-**CONCAT() - Combine strings**
+<details>
+<summary> <strong> CONCAT() - Combine strings <strong> </summary>
+
 ```sql
 SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees;
 -- Result: 'John Doe'
 ```
+</details>
 
-**UPPER() / LOWER() - Case conversion**
+<details>
+<summary> <strong> UPPER() / LOWER() - Case conversion <strong> </summary>
+
 ```sql
 SELECT UPPER(email) FROM users;  -- 'JOHN@EXAMPLE.COM'
 SELECT LOWER(email) FROM users;  -- 'john@example.com'
 ```
 
-**LENGTH() - String length**
+</details>
+
+<details>
+<summary> <strong> LENGTH() - String length <strong> </summary>
+
 ```sql
 SELECT name, LENGTH(name) AS name_length FROM products;
 -- 'Laptop' → 6
 ```
+</details>
 
-**TRIM() - Remove whitespace**
+
+<details>
+<summary> <strong> TRIM() - Remove whitespace <strong> </summary>
+
 ```sql
 SELECT TRIM(name) FROM customers;  -- '  John  ' → 'John'
 SELECT LTRIM(name) FROM customers; -- '  John' → 'John'
 SELECT RTRIM(name) FROM customers; -- 'John  ' → 'John'
 ```
 
-**SUBSTRING() - Extract portion of string**
+</details>
+
+<details>
+<summary> <strong> SUBSTRING() - Extract portion of string <strong> </summary>
+
 ```sql
 SELECT SUBSTRING(phone, 1, 3) AS area_code FROM contacts;
 -- '555-1234' → '555'
@@ -440,18 +497,26 @@ SELECT SUBSTRING(email, 1, POSITION('@' IN email) - 1) AS username FROM users;
 -- 'john@example.com' → 'john'
 ```
 
+</details>
+
 ---
 
 ## 16. Date Functions (Basic Operations)
 
-**NOW() / CURRENT_DATE - Current date/time**
+<details>
+<summary> <strong> NOW() / CURRENT_DATE - Current date/time <strong> </summary>
+
 ```sql
 SELECT NOW();           -- '2024-11-06 14:30:45'
 SELECT CURRENT_DATE;    -- '2024-11-06'
 SELECT CURRENT_TIME;    -- '14:30:45'
 ```
 
-**DATE_ADD() / DATE_SUB() - Date arithmetic**
+</details>
+
+<details>
+<summary> <strong> DATE_ADD() / DATE_SUB() - Date arithmetic <strong> </summary>
+
 ```sql
 -- Add 7 days
 SELECT DATE_ADD(order_date, INTERVAL 7 DAY) AS delivery_date FROM orders;
@@ -463,7 +528,11 @@ SELECT DATE_SUB(NOW(), INTERVAL 1 MONTH) AS last_month;
 SELECT DATE_ADD(hire_date, INTERVAL 2 YEAR) FROM employees;
 ```
 
-**DATEDIFF() - Days between dates**
+</details>
+
+<details>
+<summary> <strong> DATEDIFF() - Days between dates <strong> </summary>
+
 ```sql
 SELECT DATEDIFF(NOW(), order_date) AS days_since_order FROM orders;
 -- Returns: 45 (days difference)
@@ -472,7 +541,11 @@ SELECT DATEDIFF('2024-12-31', '2024-01-01') AS days_in_year;
 -- Returns: 365
 ```
 
-**EXTRACT() - Get year/month/day component**
+</details>
+
+<details>
+<summary> <strong> EXTRACT() - Get year/month/day component <strong> </summary>
+
 ```sql
 SELECT EXTRACT(YEAR FROM order_date) AS order_year FROM orders;
 -- '2024-03-15' → 2024
@@ -484,7 +557,11 @@ SELECT EXTRACT(DAY FROM created_at) AS day_of_month FROM posts;
 -- '2024-03-15' → 15
 ```
 
-**Common date filtering patterns**
+</details>
+
+<details>
+<summary> <strong> Common date filtering patterns <strong> </summary>
+
 ```sql
 -- Orders from last 30 days
 SELECT * FROM orders 
@@ -498,6 +575,10 @@ WHERE EXTRACT(YEAR FROM order_date) = EXTRACT(YEAR FROM NOW());
 SELECT * FROM orders 
 WHERE order_date >= '2024-03-01' AND order_date < '2024-04-01';
 ```
+</details>
+
+
+> **📊 Stat:** Time-based filtering is in ~70% of business queries.
 
 ---
 
@@ -525,11 +606,9 @@ SELECT
   END AS status_label
 FROM tasks;
 ```
-
 ---
 
-# PART 5: ADVANCED OPERATIONS
-*Production readiness*
+# PART 5: ADVANCED OPERATIONS $\color{blue}{Production\ readiness\}$
 
 ---
 
