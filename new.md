@@ -446,22 +446,17 @@ ORDER BY department ASC, salary DESC
 
 ## 15. String Functions (Essential Subset)
 
-**CONCAT() - Combine strings**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> CONCAT() - Combine strings <strong> </summary>
 
 ```sql
 SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees;
 -- Result: 'John Doe'
 ```
-
 </details>
 
-**UPPER() / LOWER() - Case conversion**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> UPPER() / LOWER() - Case conversion <strong> </summary>
 
 ```sql
 SELECT UPPER(email) FROM users;  -- 'JOHN@EXAMPLE.COM'
@@ -470,22 +465,18 @@ SELECT LOWER(email) FROM users;  -- 'john@example.com'
 
 </details>
 
-**LENGTH() - String length**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> LENGTH() - String length <strong> </summary>
 
 ```sql
 SELECT name, LENGTH(name) AS name_length FROM products;
 -- 'Laptop' → 6
 ```
-
 </details>
 
-**TRIM() - Remove whitespace**
 
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> TRIM() - Remove whitespace <strong> </summary>
 
 ```sql
 SELECT TRIM(name) FROM customers;  -- '  John  ' → 'John'
@@ -495,10 +486,8 @@ SELECT RTRIM(name) FROM customers; -- 'John  ' → 'John'
 
 </details>
 
-**SUBSTRING() - Extract portion of string**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> SUBSTRING() - Extract portion of string <strong> </summary>
 
 ```sql
 SELECT SUBSTRING(phone, 1, 3) AS area_code FROM contacts;
@@ -514,10 +503,8 @@ SELECT SUBSTRING(email, 1, POSITION('@' IN email) - 1) AS username FROM users;
 
 ## 16. Date Functions (Basic Operations)
 
-**NOW() / CURRENT_DATE - Current date/time**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> NOW() / CURRENT_DATE - Current date/time <strong> </summary>
 
 ```sql
 SELECT NOW();           -- '2024-11-06 14:30:45'
@@ -527,10 +514,8 @@ SELECT CURRENT_TIME;    -- '14:30:45'
 
 </details>
 
-**DATE_ADD() / DATE_SUB() - Date arithmetic**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> DATE_ADD() / DATE_SUB() - Date arithmetic <strong> </summary>
 
 ```sql
 -- Add 7 days
@@ -545,10 +530,8 @@ SELECT DATE_ADD(hire_date, INTERVAL 2 YEAR) FROM employees;
 
 </details>
 
-**DATEDIFF() - Days between dates**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> DATEDIFF() - Days between dates <strong> </summary>
 
 ```sql
 SELECT DATEDIFF(NOW(), order_date) AS days_since_order FROM orders;
@@ -560,10 +543,8 @@ SELECT DATEDIFF('2024-12-31', '2024-01-01') AS days_in_year;
 
 </details>
 
-**EXTRACT() - Get year/month/day component**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> EXTRACT() - Get year/month/day component <strong> </summary>
 
 ```sql
 SELECT EXTRACT(YEAR FROM order_date) AS order_year FROM orders;
@@ -578,10 +559,8 @@ SELECT EXTRACT(DAY FROM created_at) AS day_of_month FROM posts;
 
 </details>
 
-**Common date filtering patterns**
-
 <details>
-<summary>Show syntax</summary>
+<summary> <strong> Common date filtering patterns <strong> </summary>
 
 ```sql
 -- Orders from last 30 days
@@ -596,8 +575,8 @@ WHERE EXTRACT(YEAR FROM order_date) = EXTRACT(YEAR FROM NOW());
 SELECT * FROM orders 
 WHERE order_date >= '2024-03-01' AND order_date < '2024-04-01';
 ```
-
 </details>
+
 
 > **📊 Stat:** Time-based filtering is in ~70% of business queries.
 
