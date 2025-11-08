@@ -141,7 +141,7 @@ ROLLBACK TO before_raise;
 
 For long-term retention and quick mental mapping:
 
-**DDL → Structure** → CREATE, ALTER, DROP, TRUNCATE, RENAME
+**DDL → Structure** → CREATE TABLE, ALTER TABLE, DROP TABLE, TRUNCATE TABLE, RENAME TABLE
 **DML → Data** → INSERT, UPDATE, DELETE
 **DQL → Query** → SELECT
 **DCL → Access** → GRANT, REVOKE
