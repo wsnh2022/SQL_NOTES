@@ -181,8 +181,9 @@ SELECT * FROM active_customers WHERE name LIKE 'A%';
 ## 2. Query Clause Order
 
 **Write order (syntax):**
-```
-SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
+
+```sql
+-- SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
 
 SELECT DISTINCT column
 FROM table
