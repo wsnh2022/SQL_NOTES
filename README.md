@@ -710,7 +710,9 @@ FROM customers;
 
 ### Logic Errors
 
-❌ **Missing GROUP BY with aggregates**
+<details>
+<summary><strong>❌ Missing GROUP BY with aggregates</strong></summary>
+
 ```sql
 -- Wrong
 SELECT name, COUNT(*) FROM employees;
@@ -719,7 +721,11 @@ SELECT name, COUNT(*) FROM employees;
 SELECT name, COUNT(*) FROM employees GROUP BY name;
 ```
 
-❌ **Using WHERE instead of HAVING for aggregates**
+</details>
+
+<details>
+<summary><strong>❌ Using WHERE instead of HAVING for aggregates</strong></summary>
+
 ```sql
 -- Wrong
 SELECT department, AVG(salary)
@@ -734,7 +740,11 @@ GROUP BY department
 HAVING AVG(salary) > 50000;
 ```
 
-❌ **Wrong NULL comparison**
+</details>
+
+<details>
+<summary><strong>❌ Wrong NULL comparison</strong></summary>
+
 ```sql
 -- Wrong
 WHERE column = NULL
@@ -742,10 +752,13 @@ WHERE column = NULL
 -- Right
 WHERE column IS NULL
 ```
+</details>
 
 ### Performance Killers
 
-❌ **Forgetting to filter before joining**
+<details>
+<summary><strong>❌ Forgetting to filter before joining</strong></summary>
+
 ```sql
 -- Slow: joins millions of rows then filters
 SELECT * FROM orders o
@@ -758,7 +771,11 @@ JOIN customers c ON o.customer_id = c.id
 WHERE o.order_date > '2024-01-01'  -- Filter applied early
 ```
 
-❌ **Using SELECT * in production**
+</details>
+
+<details>
+<summary><strong>❌ Using SELECT * in production</strong></summary>
+
 ```sql
 -- Bad: breaks when columns change, wastes bandwidth
 SELECT * FROM users;
@@ -767,7 +784,11 @@ SELECT * FROM users;
 SELECT id, name, email FROM users;
 ```
 
-❌ **No LIMIT in exploratory queries**
+</details>
+
+<details>
+<summary><strong>❌ No LIMIT in exploratory queries</strong></summary>
+
 ```sql
 -- Dangerous: might return millions of rows
 SELECT * FROM logs;
@@ -776,7 +797,11 @@ SELECT * FROM logs;
 SELECT * FROM logs LIMIT 100;
 ```
 
-❌ **Using functions on indexed columns**
+</details>
+
+<details>
+<summary><strong>❌ Using functions on indexed columns</strong></summary>
+
 ```sql
 -- Breaks index
 WHERE YEAR(created_at) = 2024;
@@ -785,9 +810,12 @@ WHERE YEAR(created_at) = 2024;
 WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01';
 ```
 
+</details>
 ### Data Issues
 
-❌ **Comparing dates as strings**
+<details>
+<summary><strong>❌ Comparing dates as strings</strong></summary>
+
 ```sql
 -- Wrong: string comparison
 WHERE date_column > '2024-1-1'  -- Fails for Feb-Dec
@@ -796,7 +824,12 @@ WHERE date_column > '2024-1-1'  -- Fails for Feb-Dec
 WHERE date_column > '2024-01-01'
 ```
 
-❌ **Forgetting table prefixes in multi-table queries**
+</details>
+
+
+<details>
+<summary><strong>❌ Forgetting table prefixes in multi-table queries</strong></summary>
+
 ```sql
 -- Ambiguous
 SELECT name FROM customers c
@@ -807,7 +840,11 @@ SELECT c.name FROM customers c
 JOIN orders o ON c.id = o.customer_id;
 ```
 
-❌ **Not handling empty result sets**
+</details>
+
+<details>
+<summary><strong>❌ Not handling empty result sets</strong></summary>
+
 ```sql
 -- Dangerous: causes app crash if no rows
 SELECT id FROM users WHERE email = 'test@example.com';
@@ -816,9 +853,14 @@ SELECT id FROM users WHERE email = 'test@example.com';
 SELECT COALESCE(MAX(id), 0) FROM users WHERE email = 'test@example.com';
 ```
 
+</details>
+
 ### Join Mistakes
 
-❌ **Joining without ON clause (accidental CROSS JOIN)**
+
+<details>
+<summary><strong>❌ Joining without ON clause (accidental CROSS JOIN) </strong></summary>
+
 ```sql
 -- Wrong: cartesian product
 SELECT * FROM orders, customers;
@@ -828,7 +870,11 @@ SELECT * FROM orders o
 JOIN customers c ON o.customer_id = c.id;
 ```
 
-❌ **Using UNION when UNION ALL suffices**
+</details>
+
+<details>
+<summary><strong>❌ Using UNION when UNION ALL suffices</strong></summary>
+
 ```sql
 -- Slow: unnecessary deduplication
 SELECT id FROM table1
@@ -841,9 +887,13 @@ UNION ALL
 SELECT id FROM table2;
 ```
 
+</details>
+
 ### Subquery Errors
 
-❌ **Subquery returns multiple rows when expecting one**
+<details>
+<summary><strong>❌ Subquery returns multiple rows when expecting one</strong></summary>
+
 ```sql
 -- Fails if subquery returns >1 row
 WHERE salary > (SELECT salary FROM employees WHERE department = 'Sales');
@@ -851,6 +901,8 @@ WHERE salary > (SELECT salary FROM employees WHERE department = 'Sales');
 -- Safe: use aggregate
 WHERE salary > (SELECT AVG(salary) FROM employees WHERE department = 'Sales');
 ```
+
+</details>
 
 ---
 
