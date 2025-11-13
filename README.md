@@ -180,7 +180,7 @@ SELECT * FROM active_customers WHERE name LIKE 'A%';
 
 ## 2. Query Clause Order
 
-**Write order (syntax):**
+**$\color{ProcessBlue}{Write\ order\ (syntax):}$**
 
 ```sql
 -- SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
@@ -209,7 +209,7 @@ This is the standard order for writing SQL statements:
 9. **LIMIT / OFFSET / FETCH** — restrict number of rows returned
 10. **FOR UPDATE** — *(optional)* lock rows for updates
 
-**Execution order (engine processing):**
+**$\color{ProcessBlue}{Execution\ order\ (engine\ processing):}$**
 
 ```
 FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
