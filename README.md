@@ -181,67 +181,32 @@ SELECT * FROM active_customers WHERE name LIKE 'A%';
 ## 2. Query Clause Order
 
 **$\color{ProcessBlue}{Write\ order\ (syntax):}$**
-
 ```sql
--- SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
-
-SELECT DISTINCT column
-FROM table
-JOIN other_table ON condition
-WHERE filter
-GROUP BY column
-HAVING aggregate_filter
-ORDER BY column
-LIMIT n;
-
+SELECT DISTINCT column        -- specify columns; DISTINCT removes duplicates
+FROM table                    -- identify source table
+JOIN other_table ON condition -- combine tables based on condition
+WHERE filter                  -- filter individual rows before grouping
+GROUP BY column               -- aggregate rows into groups
+HAVING aggregate_filter       -- filter groups after aggregation
+ORDER BY column               -- sort final results (ASC default, DESC for reverse)
+LIMIT n OFFSET m;             -- skip m rows, return n rows
 ```
-
-This is the standard order for writing SQL statements:
-
-1. **SELECT** — specify columns to retrieve
-2. **DISTINCT** — *(optional)* remove duplicates
-3. **FROM** — identify source table(s)
-4. **JOIN / ON** — *(optional)* combine multiple tables
-5. **WHERE** — filter individual rows
-6. **GROUP BY** — aggregate rows into groups
-7. **HAVING** — filter aggregated groups
-8. **ORDER BY** — sort the result set
-9. **LIMIT / OFFSET / FETCH** — restrict number of rows returned
-10. **FOR UPDATE** — *(optional)* lock rows for updates
 
 **$\color{ProcessBlue}{Execution\ order\ (engine\ processing):}$**
-
 ```
-FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
-
 FROM → ON → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT
-
 ```
 
-This is how the database engine *actually* processes your query behind the scenes:
-
-1. **FROM** — load source tables
-2. **ON** — evaluate join conditions
-3. **JOIN** — merge tables based on conditions
-4. **WHERE** — filter rows *before* grouping
-5. **GROUP BY** — create grouped sets
-6. **HAVING** — filter groups *after* aggregation
-7. **SELECT** — compute column expressions
-8. **DISTINCT** — eliminate duplicate rows
-9. **ORDER BY** — sort final results
-10. **LIMIT / OFFSET / FETCH** — extract final row subset
-
-## **Key Takeaway**
-
-**You write it one way, but SQL executes it in a completely different order.** This explains why:
-
-- You can't reference column aliases from `SELECT` in `WHERE` (because `WHERE` runs first)
-- You *can* use aliases in `ORDER BY` (because `SELECT` runs before sorting)
-- Aggregate functions work in `HAVING` but not in `WHERE`
+**Key Differences:**
+- **WHERE** runs before **SELECT** → can't use column aliases in WHERE
+- **HAVING** runs after **GROUP BY** → filters aggregated groups, uses aggregate functions
+- **ORDER BY** runs after **SELECT** → can use column aliases
+- **DISTINCT** happens after **SELECT**, before sorting
+- **Aggregate functions** (COUNT, SUM, AVG, MAX, MIN) only in SELECT/HAVING, not WHERE
 
 > **Memory trick:** "From Where Groups Have Selected Orders Limited"
 
-**Why this matters:** Understanding execution order prevents logic errors, especially with aliases and aggregations.
+**Why this matters:** Execution order determines where aliases work and when aggregations are available—preventing logic errors.
 
 ---
 
