@@ -21,7 +21,7 @@
 
 ## 1. Core Commands
 
-### 1.1 Basic Data Manipulation
+### 1.1 Basic Data Manipulation - DML (Data Manipulation Language)
 
 <details>
 <summary> <strong> SELECT - Retrieve data <strong> </summary>
@@ -84,7 +84,7 @@ WHERE c.account_status = 'inactive';
 
 ---
 
-### 1.2 Table Structure Commands
+### 1.2 Table Structure Commands - DDL (Data Definition Language)
 
 <details>
 <summary> <strong> CREATE TABLE - Build new table <strong> </summary>
