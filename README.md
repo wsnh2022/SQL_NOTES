@@ -84,9 +84,6 @@ WHERE c.account_status = 'inactive';
 
 ---
 
-You're absolutely right! I apologize for the inconsistency. Here's the corrected version with the proper format using `<strong>` tags without closing them:
-
-```markdown
 ### 1.2 Table Structure Commands - DDL (Data Definition Language)
 
 <details>
@@ -100,6 +97,7 @@ CREATE TABLE employees (
   salary DECIMAL(10,2),
   hire_date DATE DEFAULT CURRENT_DATE
 );
+
 ```
 </details>
 
@@ -322,9 +320,8 @@ SHOW TABLE STATUS LIKE 'employees';
 </details>
 
 ---
-```
 
-Perfect! Now all entries follow your exact format with unclosed `<strong>` tags.
+Updated New version 
 
 ---
 
