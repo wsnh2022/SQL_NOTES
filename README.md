@@ -193,9 +193,6 @@ INSERT INTO orders (product) VALUES ('Mouse');   -- Gets order_id = 2
 - ⚠️ Cannot be undone - use carefully!
 
 </details>
-```
-
-</details>
 
 <details>
 <summary> <strong> RENAME TABLE - Change table name <strong> </summary>
