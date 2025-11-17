@@ -141,8 +141,60 @@ DROP TABLE IF EXISTS temp_data;
 <summary> <strong> TRUNCATE - Remove all rows, keep structure <strong> </summary>
 
 ```sql
-TRUNCATE TABLE logs;  -- Faster than DELETE, resets auto-increment
+-- Example 1: Clear shopping cart after order completion
+TRUNCATE TABLE shopping_cart;
+-- Removes all items, cart table still exists, ready for new items
+
+-- Example 2: Reset daily visitor counter
+TRUNCATE TABLE daily_visitors;
+-- Wipes today's visitor data, table structure remains intact
+
+-- Example 3: Clear temporary upload data
+TRUNCATE TABLE temp_file_uploads;
+-- Deletes all temporary files info, table ready for new uploads
+
+-- Example 4: Reset game high scores for new season
+TRUNCATE TABLE game_scores;
+-- All old scores gone, AUTO_INCREMENT back to 1
+
+-- Example 5: Clear email queue after sending
+TRUNCATE TABLE email_queue;
+-- Removes all sent emails from queue, fresh start
+
+-- Example 6: Clean test database before new testing
+TRUNCATE TABLE test_results;
+-- Removes all previous test data instantly
+
+-- COMPARISON with DELETE:
+-- TRUNCATE TABLE students;        -- Fast, removes ALL, resets ID to 1
+-- DELETE FROM students;            -- Slower, removes ALL, keeps last ID
+-- DELETE FROM students WHERE age > 18;  -- Only deletes specific rows
+
+-- AFTER TRUNCATE - IDs restart from 1:
+TRUNCATE TABLE orders;
+INSERT INTO orders (product) VALUES ('Laptop');  -- Gets order_id = 1
+INSERT INTO orders (product) VALUES ('Mouse');   -- Gets order_id = 2
 ```
+
+**Real-World Scenarios:**
+- 🛒 Empty shopping cart after checkout
+- 📊 Reset daily statistics table
+- 🗑️ Clear temporary/staging data
+- 🎮 New game season - reset leaderboard
+- 📧 Clear processed email queue
+- 🧪 Reset test environment data
+
+**Important Notes:**
+- ✅ Keeps table structure (columns, indexes)
+- ✅ Very fast operation
+- ✅ Resets AUTO_INCREMENT to 1
+- ❌ Cannot use WHERE condition
+- ❌ Deletes ALL rows only
+- ⚠️ Cannot be undone - use carefully!
+
+</details>
+```
+
 </details>
 
 <details>
@@ -278,11 +330,7 @@ ALTER TABLE employees AUTO_INCREMENT = 1000;
 -- View current auto-increment value
 SHOW TABLE STATUS LIKE 'employees';
 ```
-</details>
-
----
-
-Updated New version 
+</details> 
 
 ---
 ### 1.3 Metadata/Information Commands (Not technically DDL):
