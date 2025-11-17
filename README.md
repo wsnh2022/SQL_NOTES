@@ -210,45 +210,6 @@ DROP VIEW IF EXISTS active_employees;
 </details>
 
 <details>
-<summary> <strong> DESCRIBE / SHOW COLUMNS - View table structure <strong> </summary>
-
-```sql
--- Show table structure
-DESCRIBE employees;
-DESC employees;  -- shorthand
-
--- Alternative syntax
-SHOW COLUMNS FROM employees;
-
--- Show detailed column info
-SHOW FULL COLUMNS FROM employees;
-```
-</details>
-
-<details>
-<summary> <strong> SHOW TABLES - List all tables <strong> </summary>
-
-```sql
--- Show all tables in current database
-SHOW TABLES;
-
--- Show tables matching pattern
-SHOW TABLES LIKE 'emp%';
-
--- Show tables with full information
-SHOW FULL TABLES;
-```
-</details>
-
-<details>
-<summary> <strong> SHOW CREATE TABLE - View table creation SQL <strong> </summary>
-
-```sql
-SHOW CREATE TABLE employees;
-```
-</details>
-
-<details>
 <summary> <strong> CREATE TEMPORARY TABLE - Create session-only table <strong> </summary>
 
 ```sql
@@ -324,8 +285,50 @@ SHOW TABLE STATUS LIKE 'employees';
 Updated New version 
 
 ---
+### 1.3 Metadata/Information Commands (Not technically DDL):
 
-### 1.3 Index Management
+<details>
+<summary> <strong> DESCRIBE / SHOW COLUMNS - View table structure <strong> </summary>
+
+```sql
+-- Show table structure
+DESCRIBE employees;
+DESC employees;  -- shorthand
+
+-- Alternative syntax
+SHOW COLUMNS FROM employees;
+
+-- Show detailed column info
+SHOW FULL COLUMNS FROM employees;
+```
+</details>
+
+<details>
+<summary> <strong> SHOW TABLES - List all tables <strong> </summary>
+
+```sql
+-- Show all tables in current database
+SHOW TABLES;
+
+-- Show tables matching pattern
+SHOW TABLES LIKE 'emp%';
+
+-- Show tables with full information
+SHOW FULL TABLES;
+```
+</details>
+
+<details>
+<summary> <strong> SHOW CREATE TABLE - View table creation SQL <strong> </summary>
+
+```sql
+SHOW CREATE TABLE employees;
+```
+</details>
+
+---
+
+### 1.4 Index Management
 
 <details>
 <summary> <strong> CREATE INDEX - Manual index creation <strong> </summary>
@@ -346,7 +349,7 @@ DROP INDEX idx_email ON users;
 
 ---
 
-### 1.4 Views (Virtual Tables)
+### 1.5 Views (Virtual Tables)
 
 <details>
 <summary> <strong> CREATE VIEW - Create virtual table <strong> </summary>
