@@ -84,6 +84,9 @@ WHERE c.account_status = 'inactive';
 
 ---
 
+You're absolutely right! I apologize for the inconsistency. Here's the corrected version with the proper format using `<strong>` tags without closing them:
+
+```markdown
 ### 1.2 Table Structure Commands - DDL (Data Definition Language)
 
 <details>
@@ -113,11 +116,19 @@ ALTER TABLE employees DROP COLUMN phone;
 -- Modify column type
 ALTER TABLE employees MODIFY COLUMN salary DECIMAL(12,2);
 
+-- Rename column
+ALTER TABLE employees RENAME COLUMN name TO full_name;
+
 -- Add constraint
 ALTER TABLE employees ADD CONSTRAINT fk_dept 
   FOREIGN KEY (dept_id) REFERENCES departments(id);
-```
 
+-- Drop constraint
+ALTER TABLE employees DROP CONSTRAINT fk_dept;
+
+-- Add index
+ALTER TABLE employees ADD INDEX idx_email (email);
+```
 </details>
 
 <details>
@@ -134,8 +145,186 @@ DROP TABLE IF EXISTS temp_data;
 ```sql
 TRUNCATE TABLE logs;  -- Faster than DELETE, resets auto-increment
 ```
-
 </details>
+
+<details>
+<summary> <strong> RENAME TABLE - Change table name <strong> </summary>
+
+```sql
+-- Single table rename
+RENAME TABLE old_employees TO employees;
+
+-- Multiple table rename
+RENAME TABLE old_table1 TO new_table1,
+             old_table2 TO new_table2;
+```
+</details>
+
+<details>
+<summary> <strong> CREATE INDEX - Manual index creation <strong> </summary>
+
+```sql
+-- Single column index
+CREATE INDEX idx_name ON employees(name);
+
+-- Composite index
+CREATE INDEX idx_name_dept ON employees(name, dept_id);
+
+-- Unique index
+CREATE UNIQUE INDEX idx_email ON employees(email);
+
+-- Full-text index
+CREATE FULLTEXT INDEX idx_description ON products(description);
+```
+</details>
+
+<details>
+<summary> <strong> DROP INDEX - Remove index <strong> </summary>
+
+```sql
+DROP INDEX idx_name ON employees;
+```
+</details>
+
+<details>
+<summary> <strong> CREATE VIEW - Create virtual table <strong> </summary>
+
+```sql
+CREATE VIEW active_employees AS
+SELECT id, name, email, salary
+FROM employees
+WHERE status = 'active';
+
+-- Create or replace view
+CREATE OR REPLACE VIEW high_earners AS
+SELECT name, salary
+FROM employees
+WHERE salary > 100000;
+```
+</details>
+
+<details>
+<summary> <strong> DROP VIEW - Remove view <strong> </summary>
+
+```sql
+DROP VIEW IF EXISTS active_employees;
+```
+</details>
+
+<details>
+<summary> <strong> DESCRIBE / SHOW COLUMNS - View table structure <strong> </summary>
+
+```sql
+-- Show table structure
+DESCRIBE employees;
+DESC employees;  -- shorthand
+
+-- Alternative syntax
+SHOW COLUMNS FROM employees;
+
+-- Show detailed column info
+SHOW FULL COLUMNS FROM employees;
+```
+</details>
+
+<details>
+<summary> <strong> SHOW TABLES - List all tables <strong> </summary>
+
+```sql
+-- Show all tables in current database
+SHOW TABLES;
+
+-- Show tables matching pattern
+SHOW TABLES LIKE 'emp%';
+
+-- Show tables with full information
+SHOW FULL TABLES;
+```
+</details>
+
+<details>
+<summary> <strong> SHOW CREATE TABLE - View table creation SQL <strong> </summary>
+
+```sql
+SHOW CREATE TABLE employees;
+```
+</details>
+
+<details>
+<summary> <strong> CREATE TEMPORARY TABLE - Create session-only table <strong> </summary>
+
+```sql
+CREATE TEMPORARY TABLE temp_results (
+  id INT,
+  total DECIMAL(10,2)
+);
+-- Automatically dropped when session ends
+```
+</details>
+
+<details>
+<summary> <strong> COMMENT - Add table/column comments <strong> </summary>
+
+```sql
+-- Add comment to table
+ALTER TABLE employees COMMENT = 'Employee master data';
+
+-- Add comment to column
+ALTER TABLE employees 
+MODIFY COLUMN salary DECIMAL(10,2) COMMENT 'Monthly salary in USD';
+
+-- Add comment during table creation
+CREATE TABLE products (
+  id INT PRIMARY KEY COMMENT 'Product ID',
+  name VARCHAR(100) COMMENT 'Product name'
+) COMMENT = 'Product catalog';
+```
+</details>
+
+<details>
+<summary> <strong> CONSTRAINTS - Data integrity rules <strong> </summary>
+
+```sql
+-- Primary Key
+ALTER TABLE employees ADD PRIMARY KEY (id);
+
+-- Foreign Key
+ALTER TABLE orders ADD CONSTRAINT fk_customer
+  FOREIGN KEY (customer_id) REFERENCES customers(id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+-- Unique Constraint
+ALTER TABLE employees ADD CONSTRAINT uq_email UNIQUE (email);
+
+-- Check Constraint (MySQL 8.0.16+)
+ALTER TABLE employees ADD CONSTRAINT chk_salary 
+  CHECK (salary > 0);
+
+-- Not Null
+ALTER TABLE employees MODIFY COLUMN name VARCHAR(100) NOT NULL;
+
+-- Default Value
+ALTER TABLE employees ALTER COLUMN status SET DEFAULT 'active';
+```
+</details>
+
+<details>
+<summary> <strong> AUTO_INCREMENT - Manage auto-increment values <strong> </summary>
+
+```sql
+-- Reset auto-increment value
+ALTER TABLE employees AUTO_INCREMENT = 1000;
+
+-- View current auto-increment value
+SHOW TABLE STATUS LIKE 'employees';
+```
+</details>
+
+---
+```
+
+Perfect! Now all entries follow your exact format with unclosed `<strong>` tags.
 
 ---
 
