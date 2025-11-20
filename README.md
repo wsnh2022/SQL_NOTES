@@ -208,32 +208,6 @@ RENAME TABLE old_table1 TO new_table1,
 </details>
 
 <details>
-<summary> <strong> CREATE INDEX - Manual index creation <strong> </summary>
-
-```sql
--- Single column index
-CREATE INDEX idx_name ON employees(name);
-
--- Composite index
-CREATE INDEX idx_name_dept ON employees(name, dept_id);
-
--- Unique index
-CREATE UNIQUE INDEX idx_email ON employees(email);
-
--- Full-text index
-CREATE FULLTEXT INDEX idx_description ON products(description);
-```
-</details>
-
-<details>
-<summary> <strong> DROP INDEX - Remove index <strong> </summary>
-
-```sql
-DROP INDEX idx_name ON employees;
-```
-</details>
-
-<details>
 <summary> <strong> CREATE VIEW - Create virtual table <strong> </summary>
 
 ```sql
